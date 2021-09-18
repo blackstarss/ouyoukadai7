@@ -5,6 +5,7 @@ class BooksController < ApplicationController
     @user = current_user
     
     @book = Book.new
+    
     @books = Book.all
     # .newと記述すると、空のモデルが生成  インスタンス変数を書いた空のモデルを渡すと、フォームとBlogモデルが関連づけられます。
   end
