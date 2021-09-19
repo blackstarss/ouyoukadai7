@@ -1,20 +1,17 @@
 class BooksController < ApplicationController
 
-  
-  def index
-    @user = current_user
-    
-    @book = Book.new
-    
-    @books = Book.all
-    # .newと記述すると、空のモデルが生成  インスタンス変数を書いた空のモデルを渡すと、フォームとBlogモデルが関連づけられます。
-  end
-
   def show
     @newbook = Book.new
     @book = Book.find(params[:id])
     @user = @book.user  
   end
+  def index
+    @user = current_user
+    @book = Book.new
+    @books = Book.all
+    
+  end
+
 
   
   def create
@@ -24,7 +21,7 @@ class BooksController < ApplicationController
     # 
     if @book.save
       
-      redirect_to book_path(@book.id), notice: "Book was successfully created."
+      redirect_to book_path(@book.id), notice: "You have created book successfully."
     else
      @user = current_user
      @books = Book.all
@@ -41,6 +38,12 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    if @book.user == current_user
+    render "edit"
+    else
+    redirect_to books_path
+    end
+  
   end
   # インスタンス変数は、同じクラス内であれば、メソッドを抜け出しても使うことができます！
   # 今回は投稿済みのデータを編集するので、保存されているデータが必要。findメソッドを用いて、データを取得
@@ -49,26 +52,27 @@ class BooksController < ApplicationController
   
   def update
     @book = Book.find(params[:id])
+    @book.user_id = current_user.id
     if @book.update(book_params)
-    redirect_to book_path(@book), notice: "Book was successfully updated."
+    redirect_to book_path(@book), notice: "You have updated book successfully."
     else
       
-      render  user_path(current_user.id) 
+    render :edit
     end
   end
   # インスタンス変数で定義し直す
   
   
   def destroy
-    book = Book.find(params[:id])
-    book.destroy
-    
-    redirect_to books_path, data: { confirm: 'Are you sure?' } , notice: "Book was successfully destroyed."
+    @book = Book.find(params[:id])
+    if @book.destroy
+      flash[:notice]="Book was successfully destroyed."
+      redirect_to books_path, notice: "Book was successfully destroyed."
+    end
   end
-  
   # redirect_toメソッドが実は非常に便利に出来ていて、引数に文字列を渡すことで簡単にflash配列へとメッセージを格納することが可能
   
-  protected
+  private
   # ストロングパラメータ  privateは一種の境界線で、「ここから下はcontrollerの中でしか呼び出せません」という意味   他のアクション（index,show,createなど）を巻き込まないようにprivateはControllerファイルの一番下のendのすぐ上
   def book_params
     params.require(:book).permit(:title, :body)
