@@ -1,6 +1,6 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-md-3">
       <%= render 'users/user', user: @user %>
       <h2>New book</h2>
       <%= render 'books/book', book: @newbook %>
@@ -9,6 +9,7 @@
      <div class="col-md-8 offset-md-1">
           <h2>Book detail</h2>
        <table class="table">
+        <tbody>
         <tr>
           <td><%= link_to user_path(@user) do  %>
           <%= attachment_image_tag @user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg"%>
@@ -21,12 +22,13 @@
           
           <td><%= @book.body %></td>
           <!--投稿した自分の感想-->
-          <% if @book.user_id == current_user.id %>
+          <% if @book.user.id == current_user.id %>
           <!--投稿した本のユーザIDが自分のユーザIDと一致した場合に”編集”と”削除”追加　　　-->
             <td><%= link_to "Edit", edit_book_path(@book), class:"btn btn-success"%></td>
             <td><%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に消しますか？"}, class:"btn btn-danger" %></td>
           <% end %>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>

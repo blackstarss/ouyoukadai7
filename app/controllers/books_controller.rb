@@ -5,6 +5,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user  
   end
+  
   def index
     @user = current_user
     @book = Book.new
@@ -65,10 +66,11 @@ class BooksController < ApplicationController
   
   def destroy
     @book = Book.find(params[:id])
-    if @book.destroy
-      flash[:notice]="Book was successfully destroyed."
-      redirect_to books_path, notice: "Book was successfully destroyed."
-    end
+    
+    @book.destroy
+    
+    redirect_to books_path , notice: "Book was successfully destroyed."
+    
   end
   # redirect_toメソッドが実は非常に便利に出来ていて、引数に文字列を渡すことで簡単にflash配列へとメッセージを格納することが可能
   
