@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   
   delete 'books/:id' => 'books#destroy', as: 'destroy'
   
+  
   resources :users
   resources :books do
-    resources :favorite , only: [:create , :destroy]
+    resource :favorites , only: [:create , :destroy]
   end
 
 end

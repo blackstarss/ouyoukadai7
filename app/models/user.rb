@@ -4,13 +4,20 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          
-   has_many :books, dependent: :destroy 
-   has_many :favorites
+  has_many :books, dependent: :destroy 
+  has_many :favorites, dependent: :destroy
+  
+   
+   
    attachment :profile_image
    
    validates :name, length: {minimum: 2, maximum: 20}
    validates :name, uniqueness: true
    validates :introduction, length: {maximum: 50}
+   
+   def already_favorited?(book)
+     self.favorites.exists?(book_id: book.id)
+   end
    
  
   
