@@ -39,7 +39,31 @@
           <% end %>
         </tr>
         </tbody>
-      </table>
+        
+      
+			</table>
+			
+			
+				<h3>コメント</h3>
+		<table class="table" id="comment_list">
+			<%= render 'book_comments/comment', books: @books, book_comments: @book_comments %>
+		</table>
+			
+			
+			
+			
+
+			<div class="post-comment">
+				<%= form_with model:[@book,@book_comment], remote: true do |f| %>
+				<%# ここで非同期にする local true doを消した！ %>
+				<%= f.text_area :comment, class: "col-xs-10" %><br>
+				<!-- :の後はカラム名 -->
+			<%= f.submit '送信' %>
+				<% end %>
+			</div>
+      
+      
+      
     </div>
   </div>
 </div>
