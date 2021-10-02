@@ -41,6 +41,17 @@ class UsersController < ApplicationController
     end
   end
   
+  def follows
+    
+  end
+  
+  def followers
+  
+  end
+ 
+  
+  
+  
 
   
  private
