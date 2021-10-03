@@ -1,14 +1,17 @@
 class FavoritesController < ApplicationController
   
   def create
+    @book = Book.find(params[:book_id])
     @favorite = current_user.favorites.create(book_id: params[:book_id])
-    redirect_back(fallback_location: root_path)
+    
+    #redirect_back(fallback_location: root_path)→→非同期通信では不要
   end
 
   def destroy
+    @book = Book.find(params[:book_id])
     @favorite = Favorite.find_by(book_id: params[:book_id], user_id: current_user.id)
     @favorite.destroy
-    redirect_back(fallback_location: root_path)
+    #redirect_back(fallback_location: root_path)→→非同期通信では不要
   end
   
 end
