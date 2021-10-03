@@ -52,6 +52,7 @@
               </li>
               
               
+              
               <% else %>
               <li>
               <%= link_to root_path, class:"fas fa-home nav-link text-light" do %>
@@ -80,9 +81,10 @@
         </div>
       </nav>
     </header>
+    <div class= "search"><%= render 'searches/form'%></div>
 
     <p class= "notice"><%= notice %></p>
-    <p class= "alert"><%= alert %></p>
+   
   
     <%= yield %>
     

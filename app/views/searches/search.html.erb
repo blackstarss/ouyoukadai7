@@ -1,0 +1,11 @@
+  <div class="col-md-8 offset-md-0">
+      
+<% if @model == 'user' %>
+  <h3>Users search for "<%= @content %>"</h3>
+  <%= render 'searches/user', users: @records %>
+<% else @model == 'books' %>
+  <h3>Books search for "<%= @content %>"</h3>
+  <%= render 'searches/book', books: @records %>
+<% end %>
+
+</div>
