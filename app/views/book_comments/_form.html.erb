@@ -1,0 +1,6 @@
+	<%= form_with model:[book,book_comment] do |f| %>
+  	<%# ここで非同期にする local true doを消した！ %>
+  	<%= f.text_area :comment,  size:"90x5",class: "col-xs-10" %><br>
+  	<!-- :の後はカラム名 -->
+	  <%= f.submit '送信' %>
+	<% end %>

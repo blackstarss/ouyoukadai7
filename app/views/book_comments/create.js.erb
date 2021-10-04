@@ -1,0 +1,6 @@
+$('#comment_area').html("<%= j(render 'book_comments/comment', book_comments: @book_comments) %>");
+<!--$('#comment_form').html("<%= j(render 'book_comments/form', book: @book, book_comment: @book_comment_new) %>");-->
+<!--２行目なくても大丈夫-->
+$("textarea").val('')
+
+
