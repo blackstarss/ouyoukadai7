@@ -5,7 +5,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @book = Book.new
     @books = @user.books
-    
+    @review = Review.new
+    @starbook =  Book.find(params[:id])
+    #空のモデルの設定
   end
    
     

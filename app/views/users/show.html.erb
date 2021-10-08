@@ -1,4 +1,5 @@
 
+
 <main>      
 <div class="container px-5 px-sm-0">
   <div class="row">
@@ -39,6 +40,8 @@
 　　        <%= render partial: "favorites/favorite", locals: {book: book} %>
 　          </td>
             <td>コメント数：<%= @book.book_comments.count %></td>
+            <td><%= render 'reviews/form',review: @review, book: @starbook %></td>
+            <!--@review,@bookはuserコントローラから来ている-->
           </tr>
         <% end %>
         </tbody>
